@@ -166,7 +166,8 @@ urlpatterns += [
         TextTemplateView.as_view(template_name="robots.txt"),
         name='robots'),
     url(r'^manifest\.webapp$', WebappManifestView.as_view(template_name="manifest.webapp")),
-    url(r'^amazon-manifest\.webapp$', WebappManifestView.as_view(template_name="amazon-manifest.webapp")),
+    url(r'^amazon-manifest\.webapp$', WebappManifestView.as_view(
+        template_name="amazon-manifest.webapp")),
 
     # API
     url(r'^api/', include(v1_api.urls)),
