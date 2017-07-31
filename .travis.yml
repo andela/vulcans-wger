@@ -12,6 +12,10 @@ cache:
 # http://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure/
 sudo: false
 
+# Slack integration
+notifications:
+    slack: andela:wTXh4BqYQJIsuK4E9VV9QNRH
+
 # Python versions to test
 python:
   - "2.7"
