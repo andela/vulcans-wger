@@ -12,7 +12,7 @@ cache:
 # http://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure/
 sudo: false
 
-# Slack integration into travis
+# Slack integration into travis.
 notifications:
     slack: andela:wTXh4BqYQJIsuK4E9VV9QNRH
 
