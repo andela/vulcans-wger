@@ -20,6 +20,7 @@ django-bower
 invoke
 requests
 gunicorn
+whitenoise
 
 # REST API
 djangorestframework>=3.2,<3.3
