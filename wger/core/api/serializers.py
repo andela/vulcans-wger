@@ -26,6 +26,7 @@ from wger.core.models import (
     RepetitionUnit,
     WeightUnit)
 
+
 class UserRegistrationSerializer(serializers.ModelSerializer):
     '''
     Registration Serializer
