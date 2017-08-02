@@ -1,0 +1,23 @@
+{
+  "name": "vulcans-wger",
+  "scripts": {
+  },
+  "env": {
+    "DISABLE_COLLECTSTATIC": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/Alweezy/wger-buildpack-python"
+    }
+  ]
+}
