@@ -98,10 +98,9 @@ class UserRegistrationViewSet(viewsets.ModelViewSet):
         if creator and creator.can_use_api_create is True:
             serialized = self.get_serializer(data=self.request.data)
             if serialized.is_valid():
-                # print(serialized)
                 username=serialized.data['username']
                 email=serialized.data['email']
-                password=serialized.data['password']
+                password=self.request.data['password']
 
                 api_user = User.objects.create_user(username=username,
                                                     email=email,
@@ -131,7 +130,7 @@ class UserRegistrationViewSet(viewsets.ModelViewSet):
                 api_user.userprofile.save()   
 
                 return Response({'detail': 'User created successfully'}, status.HTTP_201_CREATED)
-            
+
         else:
             return Response({'detail': 'Bad Request'}, status.HTTP_400_BAD_REQUEST)     
 
