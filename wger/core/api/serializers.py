@@ -26,6 +26,15 @@ from wger.core.models import (
     RepetitionUnit,
     WeightUnit)
 
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    '''
+    Registration Serializer
+    '''
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password', )
+        extra_kwargs = {'password': {'write_only': True}}
+
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     '''
