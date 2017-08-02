@@ -47,10 +47,10 @@ install:
   - if [[ "$DB" = "postgresql" ]]; then pip install psycopg2; fi
 
   # Setup application
-  # Setup application
   - pip install wger
   - if [[ "$DB" = "sqlite" ]]; then wger create_settings; fi
   - if [[ "$DB" = "postgresql" ]]; then wger create_settings --database-type postgresql; fi
+
 # Create test databases
 before_script:
   - if [[ "$DB" = "postgresq" ]]; then psql -c 'DROP DATABASE IF EXISTS test_wger;' -U postgres; fi
