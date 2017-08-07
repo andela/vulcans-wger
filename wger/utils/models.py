@@ -37,8 +37,10 @@ class AbstractLicenseModel(models.Model):
                                 verbose_name=_('License'),
                                 default=2)
     '''The item's license'''
+    from django.contrib.auth.models import User
+    user_list = [(user.username, user.username) for user in User.objects.all()]
 
-    license_author = models.CharField(verbose_name=_('Author'),
+    license_author = models.CharField(choices=user_list,
                                       max_length=50,
                                       blank=True,
                                       null=True,
