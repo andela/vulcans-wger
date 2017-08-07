@@ -38,9 +38,12 @@ logger = logging.getLogger(__name__)
 @task(help={'address': 'Address to bind to. Default: localhost',
             'port': 'Port to use. Default: 8000',
             'browser': 'Whether to open the application in a browser window. Default: false',
-            'settings-path': 'Path to settings file (absolute path recommended). Leave empty for default',
-            'extra-args': 'Additional arguments to pass to the builtin server. Pass as string: "--arg1 --arg2=value". Default: none'})
-def start_wger(context, address='localhost', port=8000, browser=False, settings_path=None, extra_args=''):
+            'settings-path': 'Path to settings file (absolute path recommended).'
+                             ' Leave empty for default',
+            'extra-args': 'Additional arguments to pass to the builtin server. '
+                          'Pass as string: "--arg1 --arg2=value". Default: none'})
+def start_wger(context, address='localhost', port=8000, browser=False,
+               settings_path=None, extra_args=''):
     '''
     Start the application using django's built in webserver
     '''
@@ -58,8 +61,10 @@ def start_wger(context, address='localhost', port=8000, browser=False, settings_
     execute_from_command_line(argv)
 
 
-@task(help={'settings-path': 'Path to settings file (absolute path recommended). Leave empty for default',
-            'database-path': 'Path to sqlite database (absolute path recommended). Leave empty for default',
+@task(help={'settings-path': 'Path to settings file (absolute path recommended). '
+                             'Leave empty for default',
+            'database-path': 'Path to sqlite database (absolute path recommended). '
+                             'Leave empty for default',
             'address': 'Address to use. Default: localhost',
             'port': 'Port to use. Default: 8000',
             'browser': 'Whether to open the application in a browser window. Default: false',
@@ -110,11 +115,15 @@ def bootstrap_wger(context,
         start_wger(address=address, port=port, browser=browser, settings_path=settings_path)
 
 
-@task(help={'settings-path': 'Path to settings file (absolute path recommended). Leave empty for default',
-            'database-path': 'Path to sqlite database (absolute path recommended). Leave empty for default',
-            'database-type': 'Database type to use. Supported: sqlite3, postgresql. Default: sqlite3',
-            'key-length': 'Lenght of the generated secret key. Default: 50'})
-def create_settings(context, settings_path=None, database_path=None, url=None, database_type='sqlite3', key_length=50):
+@task(help={'settings-path':
+            'Path to settings file (absolute path recommended). Leave empty for default',
+            'database-path':
+            'Path to sqlite database (absolute path recommended). Leave empty for default',
+            'database-type':
+            'Database type to use. Supported: sqlite3, postgresql. Default: sqlite3',
+            'key-length': 'Length of the generated secret key. Default: 50'})
+def create_settings(context, settings_path=None, database_path=None, url=None,
+                    database_type='sqlite3', key_length=50):
     '''
     Creates a local settings file
     '''
@@ -135,7 +144,8 @@ def create_settings(context, settings_path=None, database_path=None, url=None, d
         url = 'http://localhost:8000'
 
     # Fill in the config file template
-    settings_template = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'wger', 'settings.tpl')
+    settings_template = os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), 'wger', 'settings.tpl')
     with open(settings_template, 'r') as settings_file:
         settings_content = settings_file.read()
 
@@ -180,7 +190,8 @@ def create_settings(context, settings_path=None, database_path=None, url=None, d
         settings_file.write(settings_content)
 
 
-@task(help={'settings-path': 'Path to settings file (absolute path recommended). Leave empty for default'})
+@task(help={'settings-path':
+            'Path to settings file (absolute path recommended). Leave empty for default'})
 def create_or_reset_admin(context, settings_path=None):
     '''
     Creates an admin user or resets the password for an existing one
@@ -206,7 +217,8 @@ def create_or_reset_admin(context, settings_path=None):
     call_command("loaddata", path + "users.json")
 
 
-@task(help={'settings-path': 'Path to settings file (absolute path recommended). Leave empty for default'})
+@task(help={'settings-path':
+            'Path to settings file (absolute path recommended). Leave empty for default'})
 def migrate_db(context, settings_path=None):
     '''
     Run all database migrations
@@ -218,7 +230,8 @@ def migrate_db(context, settings_path=None):
     call_command("migrate")
 
 
-@task(help={'settings-path': 'Path to settings file (absolute path recommended). Leave empty for default'})
+@task(help={'settings-path':
+            'Path to settings file (absolute path recommended). Leave empty for default'})
 def load_fixtures(context, settings_path=None):
     '''
     Loads all fixtures
@@ -226,7 +239,6 @@ def load_fixtures(context, settings_path=None):
 
     # Find the path to the settings and setup the django environment
     setup_django_environment(settings_path)
-
 
     # os.chdir(os.path.dirname(inspect.stack()[0][1]))
     # current_dir = os.path.join(os.getcwd(), 'wger')

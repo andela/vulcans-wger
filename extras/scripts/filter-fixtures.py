@@ -33,6 +33,7 @@ def filter_dump(data, model_list, filename):
     with open(filename, 'w') as outfile:
         json.dump(filter_data, outfile, indent=4)
 
+
 # This is a full dump of the DB
 fixture = open('data.json')
 data = json.load(fixture)
@@ -51,8 +52,10 @@ filter_dump(data, ('nutrition.ingredientweightunit',), 'ingredient_units.json')
 filter_dump(data, ('exercises.muscle',), 'muscles.json')
 filter_dump(data, ('exercises.exercisecategory',), 'categories.json')
 filter_dump(data, ('exercises.exerciseimage',), 'exercise-images.json')
-filter_dump(data, ('exercises.exercise', 'exercises.exercisecomment',), 'exercises.json')
-filter_dump(data, ('exercises.equipment', 'exercises.equipment',), 'equipment.json')
+filter_dump(data, ('exercises.exercise',
+                   'exercises.exercisecomment',), 'exercises.json')
+filter_dump(data, ('exercises.equipment',
+                   'exercises.equipment',), 'equipment.json')
 
 #
 # Gym
