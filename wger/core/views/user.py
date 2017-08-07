@@ -550,6 +550,7 @@ def fitbit_get_info(code, callback, action=None):
     except BaseException as e:
         return str(e)
 
+
 @login_required
 def sync_fitbit_weight(request):
     '''
@@ -584,6 +585,7 @@ def sync_fitbit_weight(request):
             return render(request, 'user/fitbit.html', template)
 
     return render(request, 'user/fitbit_weight_info.html', template)
+
 
 @login_required
 def sync_fitbit_activity(request):
@@ -643,6 +645,7 @@ def sync_fitbit_activity(request):
             return render(request, 'user/fitbit_activity_info.html', template)
 
     return render(request, 'user/fitbit_activity_info.html', template)
+
 
 @login_required
 def sync_fitbit_nutrition_info(request):
