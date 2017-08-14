@@ -250,7 +250,7 @@ class UserFitbitSyncTestCase(WorkoutManagerTestCase):
         self.username = 'test'
         self.password = 'testtest'
         self.code = {'code': '80b5a817c2b1d8fb2081db8d31d870446828017'}
-        self.call_back_weight = settings.SITE_URL + reverse('core:user:fitbit')
+        self.call_back_weight = settings.SITE_URL + reverse('core:user:fitbit-weight')
         self.call_back_exercise = settings.SITE_URL + reverse('core:user:fitbit-activity')
         self.call_back_ingredients = settings.SITE_URL + reverse('core:user:fitbit-ingredients')
         os.environ['RECAPTCHA_TESTING'] = 'True'
@@ -265,7 +265,7 @@ class UserFitbitSyncTestCase(WorkoutManagerTestCase):
         mock_fitbit_data.return_value = user_info
         self.client.post(reverse('core:user:login'),
                          data={'username': self.username, 'password': self.password})
-        response = self.client.get(reverse('core:user:fitbit'),
+        response = self.client.get(reverse('core:user:fitbit-weight'),
                                    data=self.code)
 
         self.assertRedirects(response, reverse('weight:overview',
