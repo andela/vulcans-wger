@@ -80,36 +80,7 @@ After the first run you can just use django's development server. You will
 probably want to move the settings and sqlite files to your git folder, see
 the comments in the documentation (development chapter) about this::
 
- $ python manage.py runserver
-
-Docker images
-~~~~~~~~~~~~~
-
-Alternatively, there are docker images for development as well, ``wger/devel``
-and ``wger/devel-fedora``. Both images contain an instance of the application
-running with django's development server using a sqlite database and  can be
-used to quickly setup a development instance (vim and tmux are already
-installed). The only difference is that devel has an ubuntu base image while
-devel-fedora uses fedora.
-
-::
-
- $ docker run -ti --name wger.devel --publish 8000:8000 wger/devel
-
-Then, *within the docker image*, activate the virtualenv
-
-::
-
-  $ source ~/venv/bin/activate
-
-and start the development server
-
-::
-
- $ python manage.py runserver 0.0.0.0:8000
-
-Then just open http://localhost:8000 and log in as: **admin**, password **admin**
-
+ $ python manage.py runserver 
 
 
 Stable version (from PyPI)
