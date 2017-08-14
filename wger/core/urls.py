@@ -98,7 +98,7 @@ patterns_user = [
         name='list'),
     url(r'^fitbit_sync_weight',
         user.sync_fitbit_weight,
-        name='fitbit'),
+        name='fitbit-weight'),
     url(r'^fitbit_sync_activity',
         user.sync_fitbit_activity,
         name='fitbit-activity'),
