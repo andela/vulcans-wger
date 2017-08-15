@@ -324,11 +324,6 @@ def preferences(request):
     user = request.user
 
     try:
-        github_login = user.social_auth.get(provider='github')
-    except UserSocialAuth.DoesNotExist:
-        github_login = None
-
-    try:
         twitter_login = user.social_auth.get(provider='twitter')
     except UserSocialAuth.DoesNotExist:
         twitter_login = None
@@ -348,7 +343,6 @@ def preferences(request):
 
     template_data['form'] = form
     template_data['email_form'] = email_form
-    template_data['github_login'] = github_login
     template_data['twitter_login'] = twitter_login
     template_data['facebook_login'] = facebook_login
     template_data['google_login'] = google_login
