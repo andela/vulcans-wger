@@ -86,6 +86,9 @@
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'weight:overview' user.username %}" rel="nofollow">{% trans "Weight overview" %}</a></li>
                                 <li><a href="{% url 'weight:add' %}" rel="nofollow">{% trans "Add weight entry" %}</a></li>
+                                <li><a href="{% url 'core:user:fitbit-weight' %}" rel="nofollow">{% trans "Sync with fitbit" %}</a></li>
+
+                                fitbit-weight
                             </ul>
                         </li>
                         {% endif %}
