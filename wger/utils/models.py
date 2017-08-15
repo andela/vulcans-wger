@@ -37,15 +37,16 @@ class AbstractLicenseModel(models.Model):
                                 verbose_name=_('License'),
                                 default=2)
     '''The item's license'''
+    from wger.core.models import UserProfile
+    user_list = [(user_profile.user.username, user_profile.user.username) for user_profile in UserProfile.objects.all()]
 
-    license_author = models.CharField(verbose_name=_('Author'),
+    license_author = models.CharField(choices=user_list,
                                       max_length=50,
                                       blank=True,
                                       null=True,
                                       help_text=_('If you are not the author, enter the name or '
                                                   'source here. This is needed for some licenses '
                                                   'e.g. the CC-BY-SA.'))
-    '''The author if it is not the uploader'''
 
 
 class AbstractSubmissionModel(models.Model):

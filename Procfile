@@ -1,1 +1,1 @@
-web: gunicorn wger.wsgi:application --log-file -
+web: ./deploy.sh
