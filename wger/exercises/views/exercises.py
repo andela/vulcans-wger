@@ -59,7 +59,7 @@ from wger.utils.widgets import (
 )
 from wger.config.models import LanguageConfig
 from wger.weight.helpers import process_log_entries
-
+from django.contrib.auth.models import User
 
 logger = logging.getLogger(__name__)
 
@@ -180,6 +180,8 @@ class ExercisesEditAddView(WgerFormMixin):
             muscles_secondary = ModelMultipleChoiceField(queryset=Muscle.objects.all(),
                                                          widget=TranslatedOriginalSelectMultiple(),
                                                          required=False)
+            license_author = ModelChoiceField(queryset=User.objects.all(),
+                                        widget=TranslatedSelect())
 
             class Meta:
                 model = Exercise
