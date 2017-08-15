@@ -726,12 +726,14 @@ class UserListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
                'active_members': [],
                'deactive_members': []}
 
-        for u in User.objects.select_related('usercache', 'userprofile__gym').filter(is_active=True):
+        for u in User.objects.select_related('usercache',
+                                             'userprofile__gym').filter(is_active=True):
             out['active_members'].append({'obj': u,
-                                   'last_log': u.usercache.last_activity})
-        for u in User.objects.select_related('usercache', 'userprofile__gym').filter(is_active=False):
+                                          'last_log': u.usercache.last_activity})
+        for u in User.objects.select_related('usercache',
+                                             'userprofile__gym').filter(is_active=False):
             out['deactive_members'].append({'obj': u,
-                                   'last_log': u.usercache.last_activity})
+                                            'last_log': u.usercache.last_activity})
 
         return out
 
