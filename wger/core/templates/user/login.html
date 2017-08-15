@@ -14,10 +14,20 @@
     {% trans 'Login' as submit_text %}
     {% render_form_fields form submit_text %}
 </form>
+<!-- Social Login -->
+<div class="form-group">
+    <h4> Social Login </h4> <hr/>
+        <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-default"> Login with Google <span class="{% fa_class 'google' %}"></span>  </a>
+        <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-default"> Login with Twitter <span class="{% fa_class 'twitter' %}"></span>  </a>
+        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-default"> Login with Facebook <span class="{% fa_class 'facebook' %}"></span> </a>
+    
+</div>
+<!-- End of Social Login -->
 {% endblock %}
 
 
 {% block sidebar %}
+
 <h4>{% trans "No account?" %}</h4>
 <p>
     <a href="{% url 'core:user:registration' %}" class="btn btn-block btn-default">
