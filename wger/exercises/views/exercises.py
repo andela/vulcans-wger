@@ -193,7 +193,7 @@ class ExercisesEditAddView(WgerFormMixin):
                           'muscles_secondary',
                           'equipment',
                           'license',
-                          'license_author']
+                          ]
 
             class Media:
                 js = ('/static/bower_components/tinymce/tinymce.min.js',)
