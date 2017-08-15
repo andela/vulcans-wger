@@ -30,4 +30,17 @@
 <!--
         Side bar
 -->
-{% block sidebar %}{% if sidebar %}{% include sidebar %}{% endif %}{% endblock %}
+{% block sidebar %}
+<!-- Social Auth -->
+<div class="form-group">
+    <h4> Social Auth </h4> <hr/>
+        <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-block btn-default"> Sign up with Google <span class="{% fa_class 'google' %}"></span>  </a>
+        <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-block btn-default"> Sign up with Twitter <span class="{% fa_class 'twitter' %}"></span>  </a>
+        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-default"> Sign up with Facebook <span class="{% fa_class 'facebook' %}"></span> </a>
+    
+</div>
+<!-- End of Social Auth -->
+    {% if sidebar %}
+        {% include sidebar %}
+    {% endif %}
+{% endblock %}
