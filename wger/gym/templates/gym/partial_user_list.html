@@ -1,6 +1,7 @@
 {% load i18n staticfiles %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'bower_components/datatables/media/css/dataTables.bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/memeber_tabs.css' %}">
 <script src="{% static 'bower_components/datatables/media/js/jquery.dataTables.min.js' %}" ></script>
 <script src="{% static 'bower_components/datatables/media/js/dataTables.bootstrap.min.js' %}" ></script>
 <script>
@@ -14,6 +15,12 @@ $(document).ready( function () {
 });
 </script>
 
+<div class="tab">
+    <button class="tablinks" onclick="displayMembers(event, 'active_users')" id="defaultOpen">Active Users</button>
+    <button class="tablinks" onclick="displayMembers(event, 'inactive_users')">Inactive Users</button>
+</div>
+
+<div id="active_users" class="tabcontent">
 <table class="table table-hover" class="main_member_list">
 <thead>
 <tr>
@@ -52,8 +59,9 @@ $(document).ready( function () {
 {% endfor %}
 </tbody>
 </table>
+</div>
 
-
+<div id="inactive_users" class="tabcontent">
 <table class="table table-hover" class="main_member_list">
     <thead>
     <tr>
@@ -92,3 +100,28 @@ $(document).ready( function () {
     {% endfor %}
     </tbody>
     </table>
+</div>
+
+<<script>
+function displayMembers(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+document.getElementById("defaultOpen").click();
+</script>
