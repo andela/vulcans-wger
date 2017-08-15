@@ -47,6 +47,9 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
 
+    # Social login
+    'social_django',
+
     # Apps from wger proper
     'wger.core',
     'wger.manager',
@@ -128,11 +131,22 @@ MIDDLEWARE_CLASSES = (
     # Django mobile
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'wger.utils.helpers.EmailAuthBackend'
+    'wger.utils.helpers.EmailAuthBackend',
+    # For Github Authentication
+    'social_core.backends.github.GithubOAuth2',
+    # For Twitter Authentication
+    'social_core.backends.twitter.TwitterOAuth',
+    # For Facebook Authentication
+    'social_core.backends.facebook.FacebookOAuth2',
+    # For Google Authentication
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth'
 )
 
 TEMPLATES = [
@@ -156,7 +170,11 @@ TEMPLATES = [
                 'django_mobile.context_processors.flavour',
 
                 # Breadcrumbs
-                'django.template.context_processors.request'
+                'django.template.context_processors.request',
+
+                # Social login
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect'
             ],
             'loaders': [
                 # Django mobile
@@ -375,3 +393,19 @@ WGER_SETTINGS = {
     'FITBIT_CLIENT_ID': os.environ.get('FITBIT_CLIENT_ID'),
     'FITBIT_CLIENT_SECRET': os.environ.get('FITBIT_CLIENT_SECRET'),
 }
+
+# Social Login Configuration
+# Google
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''  # Client ID
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''  # Client Secret
+
+# Twitter
+SOCIAL_AUTH_TWITTER_KEY = ''  # Consumer Key (API Key)
+SOCIAL_AUTH_TWITTER_SECRET = ''  # Consumer Secret (API SECRET)
+
+# Facebook
+SOCIAL_AUTH_FACEBOOK_KEY = ''  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = ''  # App Secret
+
+SOCIAL_AUTH_LOGIN_ERROR_URL = 'user/preferences'
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
