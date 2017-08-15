@@ -181,7 +181,7 @@ class ExercisesEditAddView(WgerFormMixin):
                                                          widget=TranslatedOriginalSelectMultiple(),
                                                          required=False)
             license_author = ModelChoiceField(queryset=User.objects.all(),
-                                        widget=TranslatedSelect())
+                                              widget=TranslatedSelect())
 
             class Meta:
                 model = Exercise
