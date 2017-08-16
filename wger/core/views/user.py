@@ -77,6 +77,8 @@ from wger.core.models import License
 from wger.nutrition.models import Ingredient
 from wger.utils.helpers import smart_capitalize
 
+import local_settings
+
 logger = logging.getLogger(__name__)
 
 
@@ -556,7 +558,7 @@ def sync_fitbit_weight(request):
     '''
     Integrates with fitbit to fetch weight.
     '''
-    call_back = settings.SITE_URL + reverse('core:user:fitbit-weight')
+    call_back = settings.SITE_URL + reverse('core:user:fitbit')
     template = fitbit_authorize(call_back)
     if "code" in request.GET:
         token_code = request.GET["code"]
@@ -582,7 +584,7 @@ def sync_fitbit_weight(request):
 
             messages.warning(request, _("Something went wrong") + str(e))
 
-            return render(request, 'user/fitbit_weight_info.html', template)
+            return render(request, 'user/fitbit.html', template)
 
     return render(request, 'user/fitbit_weight_info.html', template)
 
