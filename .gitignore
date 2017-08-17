@@ -58,7 +58,9 @@ target/
 
 # IDE
 .idea/
+wgerenv/
 
 # External Libraries 
 wger/core/static/bower_components
 node_modules
+.vscode/settings.json

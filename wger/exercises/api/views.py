@@ -78,6 +78,61 @@ class ExerciseViewSet(viewsets.ModelViewSet):
 
 
 @api_view(['GET'])
+def exercise_search(request):
+    '''
+    Get all info for a single exercise
+    '''
+    id = request.GET.get('id', None)
+    languages = load_item_languages(LanguageConfig.SHOW_ITEM_EXERCISES,
+                                    language_code=request.GET.get('language', None))
+
+    exercise = (Exercise.objects.filter(pk=id).filter(language__in=languages)
+                .filter(status=Exercise.STATUS_ACCEPTED).first())
+    json_response = {}
+
+    if exercise:
+        if exercise.main_image:
+            image_obj = exercise.main_image
+            image = image_obj.url
+            t = get_thumbnailer(image_obj.image)
+            thumbnail = t.get_thumbnail(aliases.get('micro_cropped')).url
+        else:
+            image = None
+            thumbnail = None
+
+        muscles = [
+            {
+                'muscle_name': muscle.name
+            }
+            for muscle in exercise.muscles.all()]
+
+        muscles_secondary = [
+            {
+                'secondary_muscle_name': muscles_secondary.name
+            }
+            for muscles_secondary in exercise.muscles_secondary.all()]
+
+        equipment = [
+            {
+                'equipment_name': equipment.name
+            }
+            for equipment in exercise.equipment.all()]
+
+        json_response = {
+
+            'exercise_id': exercise.id,
+            'exercise_name': exercise.name,
+            'muscles': muscles,
+            'muscles_secondary': muscles_secondary,
+            'equipment': equipment,
+            'image': image,
+            'thumbnail': thumbnail
+        }
+
+    return Response(json_response)
+
+
+@api_view(['GET'])
 def search(request):
     '''
     Searches for exercises.
