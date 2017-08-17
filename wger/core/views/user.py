@@ -584,7 +584,7 @@ def sync_fitbit_weight(request):
 
             messages.warning(request, _("Something went wrong") + str(e))
 
-            return render(request, 'user/fitbit.html', template)
+            return render(request, 'user/fitbit_weight_info.html', template)
 
     return render(request, 'user/fitbit_weight_info.html', template)
 
