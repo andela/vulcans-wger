@@ -326,8 +326,9 @@ class UserFitbitSyncTestCase(WorkoutManagerTestCase):
                 expected_response = 'https://www.fitbit.com/oauth2/authorize?response_type=code&' \
                                     'client_id=fake-client-id&redirect_uri=https%3A%2F%2F' \
                                     'vulcanswger-pr-10.herokuapp.com%2Fen%2Fuser%2F' \
-                                    'fitbit_sync_weight&scope=activity+nutrition+heartrate+location+' \
-                                    'nutrition+profile+settings+sleep+social+weight&state=' \
+                                    'fitbit_sync_weight&scope=activity+nutrition+' \
+                                    'heartrate+location+nutrition+profile+settings+' \
+                                    'sleep+social+weight&state=' \
                                     'YducaIA6Dv1NpTrs8SyYF78p7XDrno&prompt=login'
                 self.assertIn('https://www.fitbit.com/oauth2/authorize?response_type=code&'
                               'client_id=fake-client-id&redirect_uri=https%3A%2F%2F'
