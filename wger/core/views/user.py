@@ -558,7 +558,7 @@ def sync_fitbit_weight(request):
     '''
     Integrates with fitbit to fetch weight.
     '''
-    call_back = settings.SITE_URL + reverse('core:user:fitbit')
+    call_back = settings.SITE_URL + reverse('core:user:fitbit-weight')
     template = fitbit_authorize(call_back)
     if "code" in request.GET:
         token_code = request.GET["code"]
