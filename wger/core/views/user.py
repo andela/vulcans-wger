@@ -705,7 +705,7 @@ def sync_fitbit_nutrition_info(request):
         else:
             messages.info(request, _('You have no food collections today.'))
             return HttpResponseRedirect(
-                            reverse('nutrition:ingredient:list'))
+                reverse('nutrition:ingredient:list'))
     return render(request, 'user/fitbit_nutrition_info.html', template)
 
 
