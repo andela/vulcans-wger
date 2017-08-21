@@ -77,8 +77,6 @@ from wger.core.models import License
 from wger.nutrition.models import Ingredient
 from wger.utils.helpers import smart_capitalize
 
-import local_settings
-
 logger = logging.getLogger(__name__)
 
 
