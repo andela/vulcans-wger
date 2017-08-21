@@ -324,15 +324,11 @@ class UserFitbitSyncTestCase(WorkoutManagerTestCase):
             with self.settings(SITE_URL='http://localhost:8000'):
                 template = fitbit_authorize(self.call_back_weight)
                 expected_response = 'https://www.fitbit.com/oauth2/authorize?response_type=code&' \
-                                    'client_id=fake-client-id&redirect_uri=https%3A%2F%2F' \
-                                    'vulcanswger-pr-10.herokuapp.com%2Fen%2Fuser%2F' \
-                                    'fitbit_sync_weight&scope=activity+nutrition+' \
-                                    'heartrate+location+nutrition+profile+settings+' \
-                                    'sleep+social+weight&state=' \
-                                    'YducaIA6Dv1NpTrs8SyYF78p7XDrno&prompt=login'
-                self.assertIn('https://www.fitbit.com/oauth2/authorize?response_type=code&'
-                              'client_id=fake-client-id&redirect_uri=https%3A%2F%2F'
-                              'vulcanswger-pr-10.herokuapp.com%2Fen%2Fuser%2F', expected_response)
+                                    'client_id=fake-client-id&redirect_uri=http%3A%2F%2F' \
+                                    'localhost%3A8000%2Fen%2Fuser%2Ffitbit_sync_weight&scope=' \
+                                    'activity+nutrition+heartrate+location+nutrition+profile+' \
+                                    'settings+sleep+social+weight'
+                self.assertIn(expected_response, template['fitbit_url'])
                 self.assertIn('prompt=login', template['fitbit_url'])
 
     @patch('fitbit.Fitbit._COLLECTION_RESOURCE')
