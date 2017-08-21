@@ -152,6 +152,12 @@ The available options for the ``wger`` command (if installed from PyPI) or
   migrate_db              Run all database migrations
   start_wger              Start the application using django's built in webserver
 
+Third Party Integration:
+=======
+To integrate with other services, for instance Fitbit or even login with social login
+(Facebook, Google, Twitter, etc.), you need to set the `REDIRECT_URL` explicitly in the
+hosting site.
+
 Contact
 =======
 
