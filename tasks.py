@@ -141,7 +141,7 @@ def create_settings(context, settings_path=None, database_path=None, url=None,
 
     # Use localhost with default django port if no URL given
     if url is None:
-        url = 'http://localhost:8000'
+        url = os.getenv('SITE_URL')
 
     # Fill in the config file template
     settings_template = os.path.join(os.path.dirname(
