@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU Affero General Public License
 
 import logging
+import os
 
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseForbidden
@@ -78,6 +79,8 @@ from wger.nutrition.models import Ingredient
 from wger.utils.helpers import smart_capitalize
 
 logger = logging.getLogger(__name__)
+
+settings.SITE_URL = os.getenv('SITE_URL')
 
 
 def login(request):
