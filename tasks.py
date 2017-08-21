@@ -140,9 +140,7 @@ def create_settings(context, settings_path=None, database_path=None, url=None,
     media_folder_path = repr(get_user_data_path('wger', 'media'))
 
     # Use localhost with default django port if no URL given
-    if url is None:
-        url = os.getenv('SITE_URL')
-
+    
     # Fill in the config file template
     settings_template = os.path.join(os.path.dirname(
         os.path.abspath(__file__)), 'wger', 'settings.tpl')
@@ -177,7 +175,6 @@ def create_settings(context, settings_path=None, database_path=None, url=None,
                                                dbhost=dbhost,
                                                dbport=dbport,
                                                default_key=secret_key,
-                                               siteurl=url,
                                                media_folder_path=media_folder_path)
 
     if not os.path.exists(settings_module):

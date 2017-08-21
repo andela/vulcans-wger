@@ -195,7 +195,7 @@ EMAIL_SUBJECT_PREFIX = '[wger] '
 LOGIN_URL = '/user/login'
 LOGIN_REDIRECT_URL = '/'
 
-
+SITE_URL = os.getenv('SITE_URL')
 #
 # Internationalization
 #
