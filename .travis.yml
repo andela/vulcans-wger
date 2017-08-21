@@ -25,18 +25,10 @@ python:
 # Manually define here the combinations environment variables to test
 # https://github.com/travis-ci/travis-ci/issues/1519
 env:
-  global:
-    - SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=''
-    - SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=''
-    - SOCIAL_AUTH_TWITTER_KEY=''
-    - SOCIAL_AUTH_TWITTER_SECRET=''
-    - SOCIAL_AUTH_FACEBOOK_KEY=''
-    - SOCIAL_AUTH_FACEBOOK_SECRET=''
-  matrix:
-    - TEST_MOBILE=True  DB=postgresql TRAVIS_NODE_VERSION="4"
-    - TEST_MOBILE=True  DB=sqlite     TRAVIS_NODE_VERSION="4"
-    - TEST_MOBILE=False DB=postgresql TRAVIS_NODE_VERSION="4"
-    - TEST_MOBILE=False DB=sqlite     TRAVIS_NODE_VERSION="4"
+  - TEST_MOBILE=True  DB=postgresql TRAVIS_NODE_VERSION="4"
+  - TEST_MOBILE=True  DB=sqlite     TRAVIS_NODE_VERSION="4"
+  - TEST_MOBILE=False DB=postgresql TRAVIS_NODE_VERSION="4"
+  - TEST_MOBILE=False DB=sqlite     TRAVIS_NODE_VERSION="4"
 
 # Install the application
 install:
