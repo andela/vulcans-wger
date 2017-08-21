@@ -339,7 +339,6 @@ def preferences(request):
         google_login = None
 
     can_disconnect = (user.has_usable_password() or user.social_auth.count() > 1)
-    print(can_disconnect)
 
     template_data['form'] = form
     template_data['email_form'] = email_form
