@@ -48,10 +48,10 @@ class Command(BaseCommand):
         try:
             userObject = User.objects.get(username=username)
             user = UserProfile.objects.get(user=userObject)
-            if user.can_use_api_create is True:
+            if user.can_use_api_create:
                 return ('{} is already allowed to create users via the API'
                         .format(userObject.username))
-            elif user.can_use_api_create is False:
+            elif not user.can_use_api_create:
                 user.can_use_api_create = True
                 user.save()
                 return ('Successfully allowed {} to create users via the API'
