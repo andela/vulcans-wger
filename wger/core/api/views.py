@@ -98,9 +98,10 @@ class UserRegistrationViewSet(viewsets.ModelViewSet):
         if creator and creator.can_use_api_create is True:
             serialized = self.get_serializer(data=self.request.data)
             if serialized.is_valid():
-                username = serialized.data['username']
-                email = serialized.data['email']
-                password = self.request.data['password']
+                # print(serialized)
+                username=serialized.data['username']
+                email=serialized.data['email']
+                password=serialized.data['password']
 
                 api_user = User.objects.create_user(username=username,
                                                     email=email,
@@ -123,16 +124,16 @@ class UserRegistrationViewSet(viewsets.ModelViewSet):
                     config.gym = gym_config.default_gym
                     config.user = api_user
                     config.save()
-
+                
                 # Set the creator of the user
                 api_user.userprofile.created_by = creator.user.username
 
-                api_user.userprofile.save()
+                api_user.userprofile.save()   
 
                 return Response({'detail': 'User created successfully'}, status.HTTP_201_CREATED)
-
+            
         else:
-            return Response({'detail': 'Bad Request'}, status.HTTP_400_BAD_REQUEST)
+            return Response({'detail': 'Bad Request'}, status.HTTP_400_BAD_REQUEST)     
 
 
 class LanguageViewSet(viewsets.ReadOnlyModelViewSet):
