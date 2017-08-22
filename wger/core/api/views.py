@@ -132,7 +132,7 @@ class UserRegistrationViewSet(viewsets.ModelViewSet):
                 return Response({'detail': 'User created successfully'}, status.HTTP_201_CREATED)
 
         else:
-            return Response({'detail': 'Bad Request'}, status.HTTP_400_BAD_REQUEST)
+            return Response({'detail': 'Application not allowed to access this resource'}, status.HTTP_400_BAD_REQUEST)
 
 
 class LanguageViewSet(viewsets.ReadOnlyModelViewSet):
