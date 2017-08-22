@@ -66,4 +66,3 @@ node_modules
 .vscode/
 envw/
 package-lock.json
-.gitignore
