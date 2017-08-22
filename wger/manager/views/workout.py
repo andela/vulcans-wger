@@ -401,6 +401,7 @@ def timer(request, day_pk):
     context['repetition_units'] = RepetitionUnit.objects.all()
     return render(request, 'workout/timer.html', context)
 
+
 @login_required
 def export_workouts(request):
     '''
@@ -408,7 +409,7 @@ def export_workouts(request):
     '''
     if request.user.is_anonymous():
         return HttpResponseForbidden()
-    workouts=[]
+    workouts = []
     for item in Workout.objects.filter(user=request.user):
         items = []
         day_list = list(item.day_set.all())
@@ -416,7 +417,7 @@ def export_workouts(request):
             sets = list(day.set_set.all())
             my_sets = []
             for stuff in sets:
-                my_exs= []
+                my_exs = []
                 exercises = stuff.exercises.all()
                 for exercise in exercises:
                     results = {
@@ -440,12 +441,11 @@ def export_workouts(request):
         results = {
             "creation_date": str(item.creation_date),
             "comments": item.comment,
-            "day_list":items 
+            "day_list": items
         }
         workouts.append(results)
-        
 
-    with open('workouts.json', 'w' ) as f:
+    with open('workouts.json', 'w') as f:
         # data = serializers.serialize("json", workouts)
         data = json.dumps(workouts)
         f.write(data)
@@ -454,6 +454,6 @@ def export_workouts(request):
         response = HttpResponse(out, content_type='application/json')
         response['Content-Disposition'] = 'attachment; ' \
                                           'filename=user-' + \
-                                          str(request.user.id)+'-workouts.json'
+                                          str(request.user.id) + '-workouts.json'
 
     return response
