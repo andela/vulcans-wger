@@ -326,40 +326,6 @@ def preferences(request):
         return render(request, 'user/preferences.html', template_data)
 
 
-@login_required()
-def deactivate_trainer(request, user_pk):
-    edit_user = get_object_or_404(User, pk=user_pk)
-
-    if not request.user.is_authenticated():
-        return HttpResponseForbidden()
-
-    if (request.user.has_perm('gym.manage_gym') or request.user.has_perm('gym.gym_trainer')) \
-            and edit_user.userprofile.gym_id != request.user.userprofile.gym_id:
-        return HttpResponseForbidden()
-    if edit_user.is_active:
-        edit_user.is_active = False
-        edit_user.save()
-    messages.success(request, _("The user was successfully deactivated"))
-    return HttpResponseRedirect(reverse('core:user:overview', kwargs=({'pk': user_pk})))
-
-
-@login_required()
-def activate_trainer(request, user_pk):
-    edit_user = get_object_or_404(User, pk=user_pk)
-
-    if not request.user.is_authenticated():
-        return HttpResponseForbidden()
-
-    if (request.user.has_perm('gym.manage_gym') or request.user.has_perm('gym.gym_trainer')) \
-            and edit_user.userprofile.gym_id != request.user.userprofile.gym_id:
-        return HttpResponseForbidden()
-    if not edit_user.is_active:
-        edit_user.is_active = True
-        edit_user.save()
-    messages.success(request, _("The user was successfully activated"))
-    return HttpResponseRedirect(reverse('core:user:overview', kwargs=({'pk': user_pk})))
-
-
 class UserDeactivateView(LoginRequiredMixin,
                          WgerMultiplePermissionRequiredMixin,
                          RedirectView):
