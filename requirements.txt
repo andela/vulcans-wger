@@ -21,6 +21,7 @@ invoke
 requests
 gunicorn
 whitenoise
+django-debug-toolbar
 
 # REST API
 djangorestframework>=3.2,<3.3
