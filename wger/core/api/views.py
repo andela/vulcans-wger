@@ -95,7 +95,7 @@ class UserRegistrationViewSet(viewsets.ModelViewSet):
         creator = UserProfile.objects.get(user=self.request.user)
 
         # Check if they can be allowed to create users
-        if creator and creator.can_use_api_create is True:
+        if creator and creator.can_use_api_create:
             serialized = self.get_serializer(data=self.request.data)
             if serialized.is_valid():
                 username = serialized.data['username']
@@ -130,6 +130,9 @@ class UserRegistrationViewSet(viewsets.ModelViewSet):
                 api_user.userprofile.save()
 
                 return Response({'detail': 'User created successfully'}, status.HTTP_201_CREATED)
+            else:
+                return Response({'detail': 'Please check the credentials and try again'},
+                                status.HTTP_400_BAD_REQUEST)
 
         else:
             return Response({'detail': 'Application not allowed to access this resource'},
