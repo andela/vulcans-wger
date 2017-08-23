@@ -63,7 +63,7 @@ class MuscleListView(ListView):
         return context
 
 
-class MuscleAdminListView(LoginRequiredMixin, PermissionRequiredMixin, MuscleListView):
+class MuscleAdminListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     '''
     Overview of all muscles, for administration purposes
     '''
