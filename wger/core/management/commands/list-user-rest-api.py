@@ -45,15 +45,19 @@ class Command(BaseCommand):
         '''
         username = options.get("username", None)
 
-        try:
-            users = UserProfile.objects.all().filter(created_by=username)
-            if len(users) < 1:
-                return 'No users created by {}'.format(username)
+        if username:
+            try:
+                users = UserProfile.objects.all().filter(created_by=username)
+                if len(users) < 1:
+                    return 'No users created by {}'.format(username)
 
-            elif len(users) > 0:
-                print('The users created by {} are: '.format(username))
-                for user in users:
-                    print('\t' + user.username)
+                elif len(users) > 0:
+                    print('The users created by {} are: '.format(username))
+                    for user in users:
+                        print('\t' + user.username)
 
-        except:
-            print('User {} not found'.format(username))
+            except:
+                print('User {} not found'.format(username))
+
+        else:
+            print('No username provided. \nUsage: ./manage.py list-user-rest-api <username>')
