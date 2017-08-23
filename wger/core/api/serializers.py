@@ -37,16 +37,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
 
-class UserRegistrationSerializer(serializers.ModelSerializer):
-    '''
-    Registration Serializer
-    '''
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password', )
-        extra_kwargs = {'password': {'write_only': True}}
-
-
 class UserprofileSerializer(serializers.ModelSerializer):
     '''
     Workout session serializer
