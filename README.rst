@@ -82,6 +82,27 @@ the comments in the documentation (development chapter) about this::
 
  $ python manage.py runserver 
 
+Docker images
+~~~~~~~~~~~~~
+
+Alternatively, you can create a docker image for development as well.
+This image will contain an instance of the application
+running with django's development server using a sqlite database and  can be
+used to quickly setup a development instance (vim and tmux are already
+installed).
+
+::
+
+ $ docker build -t wger_dev .
+ $ docker run -p 8000:8000 wger_dev
+
+or interactively in the container
+
+ $ docker run -it -p 8000:8000 wger_dev /bin/bash
+
+
+Then just open http://0.0.0.0:8000 and log in as: **admin**, password **admin**
+
 
 Stable version (from PyPI)
 --------------------------
