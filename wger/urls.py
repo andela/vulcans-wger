@@ -128,6 +128,9 @@ router.register(r'mealitem', nutrition_api_views.MealItemViewSet, base_name='mea
 # Weight app
 router.register(r'weightentry', weight_api_views.WeightEntryViewSet, base_name='weightentry')
 
+# User registration
+router.register(r'register', core_api_views.UserRegistrationViewSet, base_name='api-registration')
+
 
 from django.contrib import admin
 admin.autodiscover()

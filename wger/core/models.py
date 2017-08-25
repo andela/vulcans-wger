@@ -317,6 +317,12 @@ by the US Department of Agriculture. It is extremely complete, with around
                                                    default=0)
     '''Number of Days for email weight reminder'''
 
+    can_use_api_create = models.BooleanField(default=False)
+    '''User can use API to register other users'''
+
+    created_by = models.CharField(default=None, null=True, max_length=255)
+    '''Show which app created the user'''
+
     @property
     def weight(self):
         '''
