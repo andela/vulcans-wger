@@ -21,6 +21,9 @@ invoke
 requests
 gunicorn
 whitenoise
+fitbit
+mockup
+mock
 
 # REST API
 djangorestframework>=3.2,<3.3
