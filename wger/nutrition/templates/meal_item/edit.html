@@ -25,6 +25,7 @@ $(document).ready(function() {
       class="form-horizontal">
     {% csrf_token %}
     {% render_form_errors form %}
+    {% render_form_field form.time %}
     {{form.ingredient}}
 
     <div class="form-group {% if field.errors %}has-error{% endif %}" id="form-id_ingredient_searchfield">

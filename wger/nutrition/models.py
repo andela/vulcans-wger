@@ -609,6 +609,10 @@ class MealItem(models.Model):
                                  validators=[MinValueValidator(1),
                                              MaxValueValidator(1000)])
 
+    time = Html5TimeField(null=True,
+                          blank=True,
+                          verbose_name=_('Time (approx)'))
+
     def __str__(self):
         '''
         Return a more human-readable representation
