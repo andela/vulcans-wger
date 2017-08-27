@@ -144,7 +144,7 @@ function wgerCustomModalInit()
         {% if is_owner %}
         <tr>
             <td colspan="6">
-            <a id="new_meal_add">
+            <a id="new_meal_add" data-href="{% url 'nutrition:meal:add' plan.id %}">
                 <span class="{% fa_class 'plus' %}"></span>
                 {% trans "Add a new meal" %}
             </a>
