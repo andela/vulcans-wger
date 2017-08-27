@@ -70,7 +70,8 @@ function wgerCustomModalInit()
         <td rowspan="{{meal.mealitem_set.count}}">
             <strong>
             {% trans "Nr."%} {{ forloop.parentloop.counter }}
-            {% if meal.time %} &ndash; {{meal.time|time:"H:i"}}{% endif %}
+            {% for item in meal.mealitem_set.select_related %}
+            {% endfor %}
             </strong>
 
             {% if is_owner %}
@@ -96,6 +97,9 @@ function wgerCustomModalInit()
                 {{ item.amount|floatformat:"0" }} × {{ item.weight_unit.unit.name }}
             {% endif %}
             {{ item.ingredient.name }}
+            {% if item.time %}
+            <h5>Meal time: {{item.time|time:"H:i"}}</h5>
+            {% endif %}
 
             {% if is_owner %}
             <span class="editoptions">
