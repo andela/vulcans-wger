@@ -90,8 +90,13 @@
         // Check for RO-access before allowing sharing
         wgerToggleReadOnlyAccess();
 
-        $('#new_meal_add').click(function(event){
-
+        $('#new_meal_add').click(function(){
+                                 var url = $(this).attr('data-href');
+                                 $.ajax(url, {"method":"POST",
+                                              success: function(){
+                                                       window.location.reload();
+                                                       }
+                                              });
                                  });
 
      });
