@@ -25,6 +25,8 @@ fitbit
 mockup
 mock
 
+django-debug-toolbar
+
 # REST API
 djangorestframework>=3.2,<3.3
 django-filter
