@@ -453,7 +453,7 @@ def export_workouts(request):
     with open('workouts.json', 'r') as out:
         response = HttpResponse(out, content_type='application/json')
         response['Content-Disposition'] = 'attachment; ' \
-                                          'filename=user-' + \
-                                          str(request.user.id) + '-workouts.json'
+                                          'filename=' + \
+                                          str(request.user.username) + '-workouts.json'
 
     return response
