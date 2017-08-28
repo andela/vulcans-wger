@@ -392,20 +392,19 @@ WGER_SETTINGS = {
     'TWITTER': False,
     'FITBIT_CLIENT_ID': os.environ.get('FITBIT_CLIENT_ID'),
     'FITBIT_CLIENT_SECRET': os.environ.get('FITBIT_CLIENT_SECRET'),
+    # Social Login Configuration
+    # Google
+    'SOCIAL_AUTH_GOOGLE_OAUTH2_KEY': os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY'),  # Client ID
+    'SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET': os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET'),  # Client Secret
+
+    # Twitter
+    'SOCIAL_AUTH_TWITTER_KEY': os.environ.get('SOCIAL_AUTH_TWITTER_KEY'),  # API Key
+    'SOCIAL_AUTH_TWITTER_SECRET': os.environ.get('SOCIAL_AUTH_TWITTER_SECRET'),  # API SECRET
+
+    # Facebook
+    'SOCIAL_AUTH_FACEBOOK_KEY': os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY'),  # App ID
+    'SOCIAL_AUTH_FACEBOOK_SECRET': os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET'),  # App Secret
+
+    'SOCIAL_AUTH_LOGIN_ERROR_URL': 'user/preferences',
+    'SOCIAL_AUTH_RAISE_EXCEPTIONS': False
 }
-
-# Social Login Configuration
-# Google
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_KEY']  # Client ID
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']  # Client Secret
-
-# Twitter
-SOCIAL_AUTH_TWITTER_KEY = os.environ['SOCIAL_AUTH_TWITTER_KEY']  # API Key
-SOCIAL_AUTH_TWITTER_SECRET = os.environ['SOCIAL_AUTH_TWITTER_SECRET']  # API SECRET
-
-# Facebook
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ['SOCIAL_AUTH_FACEBOOK_KEY']  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ['SOCIAL_AUTH_FACEBOOK_SECRET']  # App Secret
-
-SOCIAL_AUTH_LOGIN_ERROR_URL = 'user/preferences'
-SOCIAL_AUTH_RAISE_EXCEPTIONS = False
