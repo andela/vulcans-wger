@@ -5,6 +5,24 @@
   "env": {
     "DISABLE_COLLECTSTATIC": {
       "required": true
+    },
+    "SOCIAL_AUTH_FACEBOOK_KEY": {
+      "required": true
+    },
+    "SOCIAL_AUTH_FACEBOOK_SECRET": {
+      "required": true
+    },
+    "SOCIAL_AUTH_GOOGLE_OAUTH2_KEY": {
+      "required": true
+    },  
+    "SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET": {
+      "required": true
+    },
+    "SOCIAL_AUTH_TWITTER_KEY": {
+      "required": true
+    },
+    "SOCIAL_AUTH_TWITTER_SECRET": {
+      "required": true
     }
   },
   "formation": {
