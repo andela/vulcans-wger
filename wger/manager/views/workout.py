@@ -19,13 +19,16 @@ import uuid
 import datetime
 
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden, HttpResponse
 from django.template.context_processors import csrf
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy, ugettext as _
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DeleteView, UpdateView
+from django.core import serializers
+import json
+
 
 from wger.core.models import (
     RepetitionUnit,
@@ -397,3 +400,60 @@ def timer(request, day_pk):
     context['weight_units'] = WeightUnit.objects.all()
     context['repetition_units'] = RepetitionUnit.objects.all()
     return render(request, 'workout/timer.html', context)
+
+
+@login_required
+def export_workouts(request):
+    '''
+        Exports workouts of a selected gym member
+    '''
+    if request.user.is_anonymous():
+        return HttpResponseForbidden()
+    workouts = []
+    for item in Workout.objects.filter(user=request.user):
+        items = []
+        day_list = list(item.day_set.all())
+        for day in day_list:
+            sets = list(day.set_set.all())
+            my_sets = []
+            for stuff in sets:
+                my_exs = []
+                exercises = stuff.exercises.all()
+                for exercise in exercises:
+                    results = {
+                        "id": exercise.id,
+                        "name": exercise.name,
+                        "description": exercise.description
+                    }
+                    my_exs.append(results)
+
+                results = {
+                    "id": stuff.id,
+                    "exercises": my_exs
+                }
+                my_sets.append(results)
+            results = {
+                "training": str(day.training),
+                "description": day.description,
+                "sets": my_sets
+            }
+            items.append(results)
+        results = {
+            "creation_date": str(item.creation_date),
+            "comments": item.comment,
+            "day_list": items
+        }
+        workouts.append(results)
+
+    with open('workouts.json', 'w') as f:
+        # data = serializers.serialize("json", workouts)
+        data = json.dumps(workouts)
+        f.write(data)
+
+    with open('workouts.json', 'r') as out:
+        response = HttpResponse(out, content_type='application/json')
+        response['Content-Disposition'] = 'attachment; ' \
+                                          'filename=' + \
+                                          str(request.user.username) + '-workouts.json'
+
+    return response
