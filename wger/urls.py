@@ -134,7 +134,7 @@ router.register(r'register', core_api_views.UserRegistrationViewSet, base_name='
 
 from django.contrib import admin
 admin.autodiscover()
-
+import debug_toolbar
 #
 # Sitemaps
 #
@@ -158,7 +158,8 @@ urlpatterns = i18n_patterns(
     url(r'^sitemap\.xml$',
         sitemap,
         {'sitemaps': sitemaps},
-        name='sitemap')
+        name='sitemap'),
+    url(r'^__debug__/', include(debug_toolbar.urls)),
 )
 
 #
