@@ -59,6 +59,18 @@
     </td>
     <td>{{current_user.obj.is_active}}</td>
 
+    {% if current_user.obj.is_active %}
+        {% with status="Active" %}
+            <td>{{status}}</td>
+        {% endwith %}
+    {%else%}
+        {% with status="Inactive" %}
+            <td>{{status}}</td>
+        {%endwith %}
+    {%endif%}
+
+    
+
     {% if perms.gym.manage_gym or perms.gym.manage_gyms %}
     <td style="text-align: right;">
         <div class="btn-group pull-right">
@@ -85,7 +97,10 @@
                 {% endif %}
             </ul>
         </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> [Feature #149470711] fix user activation
     </td>
     {% endif %}
 </tr>
