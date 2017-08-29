@@ -160,6 +160,7 @@ urlpatterns = i18n_patterns(
         {'sitemaps': sitemaps},
         name='sitemap'),
     url(r'^__debug__/', include(debug_toolbar.urls)),
+    url(r'^oauth/', include('social_django.urls', namespace='social'))
 )
 
 #
@@ -189,3 +190,8 @@ urlpatterns += [
 #
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Social Login URLs
+LOGIN_URL = 'user/login'
+LOGOUT_URL = 'user/logout'
+LOGIN_REDIRECT_URL = 'user/preferences'
