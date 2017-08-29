@@ -127,6 +127,7 @@ def exercise_search(request):
             'equipment': equipment,
             'image': image,
             'thumbnail': thumbnail
+        }
     else:
         return Response("Exercise not found",404)
 
