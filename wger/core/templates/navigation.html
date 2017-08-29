@@ -67,6 +67,7 @@
                                 <li><a href="{% url 'exercise:equipment:list' %}">{% trans "Equipment" %}</a></li>
                                 <li><a href="{% url 'exercise:muscle:admin-list' %}">{% trans "Muscles" %}</a></li>
                                 <li><a href="{% url 'exercise:category:list' %}">{% trans "Categories" %}</a></li>
+                                <li><a href="{% url 'core:user:fitbit-activity' %}">{% trans "Sync with fitbit" %}</a></li>
                                 {% endif %}
                             </ul>
                         </li>
@@ -85,6 +86,8 @@
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'weight:overview' user.username %}" rel="nofollow">{% trans "Weight overview" %}</a></li>
                                 <li><a href="{% url 'weight:add' %}" rel="nofollow">{% trans "Add weight entry" %}</a></li>
+                                <li><a href="{% url 'core:user:fitbit-weight' %}" rel="nofollow">{% trans "Sync with fitbit" %}</a></li>
+
                             </ul>
                         </li>
                         {% endif %}
@@ -104,6 +107,8 @@
                             <li><a href="{% url 'nutrition:ingredient:list' %}">{% trans "Ingredient overview" %}</a></li>
                             <li><a href="{% url 'nutrition:bmi:view' %}" rel="nofollow">{% trans "BMI calculator" %}</a></li>
                             <li><a href="{% url 'nutrition:calories:view' %}" rel="nofollow">{% trans "Daily calories calculator" %}</a></li>
+                            <li><a href="{% url 'core:user:fitbit-ingredients' %}" rel="nofollow">{% trans "Sync with fitbit" %}</a></li>
+
                             {% if perms.nutrition %}
                                 <li class="divider"></li>
                                 <li class="dropdown-header">{% trans "Administration" %}</li>

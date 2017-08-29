@@ -128,8 +128,11 @@ def exercise_search(request):
             'image': image,
             'thumbnail': thumbnail
         }
+<<<<<<< HEAD
     else:
         return Response("Exercise not found",404)
+=======
+>>>>>>> 7d52cd161be825ea92304ee5d55415b779edefe3
 
     return Response(json_response)
 
