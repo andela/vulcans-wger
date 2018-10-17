@@ -42,6 +42,10 @@ from rest_framework.authtoken.models import Token
 import datetime
 from fitbit import FitbitOauth2Client, Fitbit
 from django.db import IntegrityError
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from social_django.models import UserSocialAuth
 
 from wger.utils.constants import USER_TAB
 from wger.utils.generic_views import WgerFormMixin, WgerMultiplePermissionRequiredMixin
@@ -316,14 +320,59 @@ def preferences(request):
     else:
         email_form = UserPersonalInformationForm(instance=request.user)
 
+    # Get Connected Accounts
+    user = request.user
+
+    try:
+        twitter_login = user.social_auth.get(provider='twitter')
+    except UserSocialAuth.DoesNotExist:
+        twitter_login = None
+
+    try:
+        facebook_login = user.social_auth.get(provider='facebook')
+    except UserSocialAuth.DoesNotExist:
+        facebook_login = None
+
+    try:
+        google_login = user.social_auth.get(provider='google-oauth2')
+    except UserSocialAuth.DoesNotExist:
+        google_login = None
+
+    can_disconnect = (user.has_usable_password() or user.social_auth.count() > 1)
+
     template_data['form'] = form
     template_data['email_form'] = email_form
+    template_data['twitter_login'] = twitter_login
+    template_data['facebook_login'] = facebook_login
+    template_data['google_login'] = google_login
+    template_data['can_disconnect'] = can_disconnect
 
     if redirect:
         messages.success(request, _('Settings successfully updated'))
         return HttpResponseRedirect(reverse('core:user:preferences'))
     else:
         return render(request, 'user/preferences.html', template_data)
+
+
+@login_required
+def set_password(request):
+    if request.user.has_usable_password():
+        PasswordForm = PasswordChangeForm
+    else:
+        PasswordForm = AdminPasswordChangeForm
+
+    if request.method == 'POST':
+        form = PasswordForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('core:user:preferences')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordForm(request.user)
+    return render(request, 'user/set_password.html', {'form': form})
 
 
 class UserDeactivateView(LoginRequiredMixin,
